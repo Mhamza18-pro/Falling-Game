@@ -21,6 +21,12 @@ player_y = screen_height - player_size
 is_paused = False  # Initialize pause state
 object_rand_value= random.randint(1,20) #Initialized a new variable to store a random value in the object falling
 
+# initializing variable to use in drawing the number on the object
+number=0
+font = pygame.font.Font(None, 36)
+white = (255, 255, 255)
+black = (0, 0, 0)
+
 # Game clock
 clock = pygame.time.Clock()
 
@@ -29,11 +35,18 @@ while running:
   for event in pygame.event.get():
     if event.type == pygame.QUIT:
       running = False
+  
   # Game logic when not paused
   if not is_paused:
     object_y += object_speed
+    
     if object_y > screen_height:
-      running = False  # End the game
+      
+      # Creates new falling object
+      object_x = random.randint(0, screen_width - object_size)
+      object_y = 0
+      number+=1
+    
     if player_y < object_y + object_size and player_x < object_x + object_size and player_x + player_size > object_x:
       object_x = random.randint(0, screen_width - object_size)
       object_y = 0
@@ -41,9 +54,14 @@ while running:
   screen.fill(background_color)
   pygame.draw.rect(screen, object_color,
                    (object_x, object_y, object_size, object_size))
-
+  
+  # Draws a value on the object as it falls
+  text_surface = font.render(str(number), True, black)
+  text_rect = text_surface.get_rect(center=(object_x + object_size // 2, object_y + object_size // 2))
+  screen.blit(text_surface, text_rect)
+  
   pygame.display.flip()
-  clock.tick(30)
+  clock.tick(10) #the number you put in parentheses effects the speed the coin falls
 
 
 pygame.quit()
