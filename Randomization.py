@@ -15,7 +15,7 @@ def randomSequence(randomNum1, randomNum2, randomOperation):
     elif randomOperation == "+":
             print(randomNum1 + randomNum2)
     elif randomOperation == "/":
-         print(randomNum1 / randomNum2)
+         print(int(randomNum1 / randomNum2))
     else:
          print(randomNum1 - randomNum2)
 
