@@ -1,5 +1,6 @@
 
 # ---- TASK ONE: GENEREATE RANDOM MATH PROBLEMS ------ [COMPLETE]
+from fractions import Fraction
 import random
 
 randomNum1 = random.randint(0,20)
@@ -15,7 +16,7 @@ def randomSequence(randomNum1, randomNum2, randomOperation):
     elif randomOperation == "+":
             print(randomNum1 + randomNum2)
     elif randomOperation == "/":
-         print(int(randomNum1 / randomNum2))
+         print(Fraction(randomNum1 / randomNum2))
     else:
          print(randomNum1 - randomNum2)
 
