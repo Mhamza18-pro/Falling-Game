@@ -11,16 +11,14 @@ randomOperation = listOfOperations[i]
 
 def randomSequence(randomNum1, randomNum2, randomOperation):
     if randomOperation == "x":
-        print(randomNum1 * randomNum2)
+        print("THE ANSWER:  " + str(randomNum1 * randomNum2))
     elif randomOperation == "+":
-            print(randomNum1 + randomNum2)
+            print("THE ANSWER: " + str(randomNum1 + randomNum2))
     elif randomOperation == "/":
-         print(Fraction(randomNum1 / randomNum2))
+         print("THE ANSWER: " + str(Fraction(randomNum1 / randomNum2)))
     else:
-         print(randomNum1 - randomNum2)
+         print("THE ANSWER: " + str(randomNum1 - randomNum2))
     return(str(randomNum1) + " " + str(randomOperation) + " " + str(randomNum2) + " = ")
-
-randomSequence(randomNum1, randomNum2, randomOperation)
 
 # ---- TASK TWO: CHARACTER SPEED CHANGES UPON GOLD CONSUMPTION ------ [COMPLETE]
 

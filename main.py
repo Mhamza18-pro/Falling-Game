@@ -57,7 +57,9 @@ while running:
       running = False
     if event.type == pygame.USEREVENT:
       counter -= 1
-      timer_text = str(counter).rjust(3) if counter > 0 else "Time's Up!"
+      timer_text = str(counter).rjust(3) if counter > 0 else "Time's Up!" 
+      if counter == -2:
+        running = False
   
   # Game logic when not paused
   if not is_paused:
@@ -79,7 +81,7 @@ while running:
                    (object_x, object_y, object_size, object_size))
   
 
-  #Add the timer to the screen
+  #Add the timer to the screen 
   screen.blit(timer_font.render(timer_text, True, black), (32,48))
 
   #Add the math problems to the screen
