@@ -8,10 +8,18 @@ listOfOperations = ["x", "+", "-", "/"]
 i = random.randint(0,3)
 randomOperation = listOfOperations[i]
 
-def randomSequence():
+def randomSequence(randomNum1, randomNum2, randomOperation):
     print(str(randomNum1) + " " + str(randomOperation) + " " + str(randomNum2) + " = ")
+    if randomOperation == "x":
+        print(randomNum1 * randomNum2)
+    elif randomOperation == "+":
+            print(randomNum1 + randomNum2)
+    elif randomOperation == "/":
+         print(randomNum1 / randomNum2)
+    else:
+         print(randomNum1 - randomNum2)
 
-randomSequence()
+randomSequence(randomNum1, randomNum2, randomOperation)
 
 # ---- TASK TWO: CHARACTER SPEED CHANGES UPON GOLD CONSUMPTION ------ [COMPLETE]
 
@@ -26,5 +34,6 @@ def increasePlayerSpeed(correctAnswer):
         playerXSpeed = playerXSpeed - 10 #player slpws down upon incorrect answer
         print(playerXSpeed) #for testing purposes
 
-increasePlayerSpeed(False) #for testing purposes
+# increasePlayerSpeed(False) #for testing purposes
+
     
