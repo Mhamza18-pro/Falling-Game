@@ -1,5 +1,7 @@
 import pygame
 import random
+import Randomization
+
 
 # Initialize Pygame
 pygame.init()
@@ -30,11 +32,32 @@ black = (0, 0, 0)
 # Game clock
 clock = pygame.time.Clock()
 
+# Timer
+counter, timer_text = 10, '10'.rjust(3)
+pygame.time.set_timer(pygame.USEREVENT,1000)
+timer_font = pygame.font.Font(None,30)
+
+# Math Problem Variables
+randomNum1 = random.randint(0,20)
+randomNum2 = random.randint(0,20)
+listOfOperations = ["x", "+", "-", "/"]
+i = random.randint(0,3)
+randomOperation = listOfOperations[i]
+
+# Random Math Problems
+math_problems_font = pygame.font.Font(None, 30)
+math_problems_text = str(Randomization.randomSequence(randomNum1, randomNum2, randomOperation))
+
+
 running = True
 while running:
+  
   for event in pygame.event.get():
     if event.type == pygame.QUIT:
       running = False
+    if event.type == pygame.USEREVENT:
+      counter -= 1
+      timer_text = str(counter).rjust(3) if counter > 0 else "Time's Up!"
   
   # Game logic when not paused
   if not is_paused:
@@ -54,6 +77,13 @@ while running:
   screen.fill(background_color)
   pygame.draw.rect(screen, object_color,
                    (object_x, object_y, object_size, object_size))
+  
+
+  #Add the timer to the screen
+  screen.blit(timer_font.render(timer_text, True, black), (32,48))
+
+  #Add the math problems to the screen
+  screen.blit(timer_font.render(math_problems_text, True, black), (350,32))
   
   # Draws a value on the object as it falls
   text_surface = font.render(str(number), True, black)

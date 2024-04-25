@@ -10,7 +10,6 @@ i = random.randint(0,3)
 randomOperation = listOfOperations[i]
 
 def randomSequence(randomNum1, randomNum2, randomOperation):
-    print(str(randomNum1) + " " + str(randomOperation) + " " + str(randomNum2) + " = ")
     if randomOperation == "x":
         print(randomNum1 * randomNum2)
     elif randomOperation == "+":
@@ -19,6 +18,7 @@ def randomSequence(randomNum1, randomNum2, randomOperation):
          print(Fraction(randomNum1 / randomNum2))
     else:
          print(randomNum1 - randomNum2)
+    return(str(randomNum1) + " " + str(randomOperation) + " " + str(randomNum2) + " = ")
 
 randomSequence(randomNum1, randomNum2, randomOperation)
 
