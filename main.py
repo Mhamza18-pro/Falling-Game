@@ -23,6 +23,9 @@ player_y = screen_height - player_size
 is_paused = False  # Initialize pause state
 object_rand_value= random.randint(1,20) #Initialized a new variable to store a random value in the object falling
 
+# initializing a score variable
+score=0
+
 # initializing variable to use in drawing the number on the object
 number=0
 font = pygame.font.Font(None, 36)
@@ -86,6 +89,14 @@ while running:
 
   #Add the math problems to the screen
   screen.blit(timer_font.render(math_problems_text, True, black), (350,32))
+  
+  # Implements code for counting score
+  if not is_paused:
+    text = font.render("Score: " + str(score), True, (0, 0, 0))
+    screen.blit(text, (510, 20))
+  else:
+    pause_text = font.render("Paused - Press Space to Resume", True, (0, 0, 0))
+    screen.blit(pause_text, (screen_width // 2 - 200, screen_height // 2))
   
   # Draws a value on the object as it falls
   text_surface = font.render(str(number), True, black)
