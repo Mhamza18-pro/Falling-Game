@@ -27,7 +27,7 @@ object_rand_value= random.randint(1,20) #Initialized a new variable to store a r
 score=0
 
 # initializing variable to use in drawing the number on the object
-number=0
+
 font = pygame.font.Font(None, 36)
 white = (255, 255, 255)
 black = (0, 0, 0)
@@ -36,7 +36,7 @@ black = (0, 0, 0)
 clock = pygame.time.Clock()
 
 # Timer
-counter, timer_text = 10, '10'.rjust(3)
+counter, timer_text = 30, '30'.rjust(3)
 pygame.time.set_timer(pygame.USEREVENT,1000)
 timer_font = pygame.font.Font(None,30)
 
@@ -49,7 +49,8 @@ randomOperation = listOfOperations[i]
 
 # Random Math Problems
 math_problems_font = pygame.font.Font(None, 30)
-math_problems_text = str(Randomization.randomSequence(randomNum1, randomNum2, randomOperation))
+math_problems_text = str(Randomization.showProblem(randomNum1, randomNum2, randomOperation))
+number = Randomization.randomSequence(randomNum1, randomNum2, randomOperation)
 
 
 running = True
@@ -73,7 +74,7 @@ while running:
       # Creates new falling object
       object_x = random.randint(0, screen_width - object_size)
       object_y = 0
-      number+=1
+      number +=1
     
     if player_y < object_y + object_size and player_x < object_x + object_size and player_x + player_size > object_x:
       object_x = random.randint(0, screen_width - object_size)
