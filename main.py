@@ -11,7 +11,7 @@ screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption('Catching Falling Objects')
 
 # Define colors and game properties
-background_color = pygame.image.load('GameAssets/SEO_GoldIngots.png').convert_alpha()
+background_color = pygame.image.load('GameAssets/7-Little_Helpers-Rainbow_City.webp').convert_alpha()
 object_color = pygame.image.load('GameAssets/SEO_GoldIngots.png').convert_alpha()
 player_color = (0, 0, 255)
 object_size, player_size = 50, 50
@@ -80,7 +80,7 @@ while running:
       object_x = random.randint(0, screen_width - object_size)
       object_y = 0
   
-  screen.fill(background_color)
+  screen.blit(background_color,(0,0))
   screen.blit(object_color, (object_x, object_y),(100,100,100,100))
   # pygame.draw.rect(screen, object_color,
   #                  (object_x, object_y, object_size, object_size))
