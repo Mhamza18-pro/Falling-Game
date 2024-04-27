@@ -71,10 +71,24 @@ while running:
     object_y += object_speed
     
     if object_y > screen_height:
+      # generate a new problem each time the gold falls off the screen
+      randomNum1 = random.randint(0,20)
+      randomNum2 = random.randint(0,20)
+      listOfOperations = ["x", "+", "-", "/"]
+      i = random.randint(0,3)
+      randomOperation = listOfOperations[i]
+
+      # Random Math Problems
+      math_problems_font = pygame.font.Font(None, 30)
+      math_problems_text = str(Randomization.showProblem(randomNum1, randomNum2, randomOperation))
       
       # Creates new falling object
       object_x = random.randint(0, screen_width - object_size)
       object_y = 0
+
+      Randomization.randomSequence(1,2,'+')
+
+      math_problems_text = str(Randomization.showProblem(randomNum1, randomNum2, randomOperation))
 
       #There is a 50% chance that the falling object will be the right answer
       probability = random.randint(0,50) #generates a new probabiiliy each time item fall off screen
@@ -90,9 +104,6 @@ while running:
   
   screen.blit(background_color,(0,0))
   screen.blit(object_color, (object_x, object_y),(100,100,100,100))
-  # pygame.draw.rect(screen, object_color,
-  #                  (object_x, object_y, object_size, object_size))
-  
 
   #Add the timer to the screen 
   screen.blit(timer_font.render(timer_text, True, black), (32,48))
@@ -114,7 +125,7 @@ while running:
   screen.blit(text_surface, text_rect)
   
   pygame.display.flip()
-  clock.tick(10) #the number you put in parentheses effects the speed the coin falls
+  clock.tick(20) #the number you put in parentheses effects the speed the coin falls
 
 
 pygame.quit()
