@@ -36,7 +36,7 @@ black = (0, 0, 0)
 clock = pygame.time.Clock()
 
 # Timer
-counter, timer_text = 30, '30'.rjust(3)
+counter, timer_text = 60, '60'.rjust(3)
 pygame.time.set_timer(pygame.USEREVENT,1000)
 timer_font = pygame.font.Font(None,30)
 
@@ -50,8 +50,9 @@ randomOperation = listOfOperations[i]
 # Random Math Problems
 math_problems_font = pygame.font.Font(None, 30)
 math_problems_text = str(Randomization.showProblem(randomNum1, randomNum2, randomOperation))
-number = int(Randomization.randomSequence(randomNum1, randomNum2, randomOperation))
 
+# Gold ignot falls with a random number initially
+number = random.randint(-100,100)
 
 running = True
 while running:
@@ -74,7 +75,14 @@ while running:
       # Creates new falling object
       object_x = random.randint(0, screen_width - object_size)
       object_y = 0
-      number +=1
+
+      #There is a 50% chance that the falling object will be the right answer
+      probability = random.randint(0,50) #generates a new probabiiliy each time item fall off screen
+      print(probability)
+      if(probability%2 == 0):
+        number = Randomization.randomSequence(randomNum1, randomNum2, randomOperation)
+      else:
+        number = random.randint(-100,100)
     
     if player_y < object_y + object_size and player_x < object_x + object_size and player_x + player_size > object_x:
       object_x = random.randint(0, screen_width - object_size)
