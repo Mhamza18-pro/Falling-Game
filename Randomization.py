@@ -31,6 +31,7 @@ def showProblem(randomNum1, randomNum2, randomOperation):
 
 
 
+
 # ---- TASK TWO: CHARACTER SPEED CHANGES UPON GOLD CONSUMPTION ------ [COMPLETE]
 
 correctAnswer = bool

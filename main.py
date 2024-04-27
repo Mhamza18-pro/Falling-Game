@@ -20,8 +20,8 @@ object_y = 0
 object_speed = 10
 player_x = screen_width // 2
 player_y = screen_height - player_size
+player_speed = 10
 is_paused = False  # Initialize pause state
-object_rand_value= random.randint(1,20) #Initialized a new variable to store a random value in the object falling
 
 # initializing a score variable
 score=0
@@ -86,10 +86,6 @@ while running:
       object_x = random.randint(0, screen_width - object_size)
       object_y = 0
 
-      Randomization.randomSequence(1,2,'+')
-
-      math_problems_text = str(Randomization.showProblem(randomNum1, randomNum2, randomOperation))
-
       #There is a 50% chance that the falling object will be the right answer
       probability = random.randint(0,50) #generates a new probabiiliy each time item fall off screen
       print(probability)
@@ -98,9 +94,17 @@ while running:
       else:
         number = random.randint(-100,100)
     
-    if player_y < object_y + object_size and player_x < object_x + object_size and player_x + player_size > object_x:
-      object_x = random.randint(0, screen_width - object_size)
-      object_y = 0
+    if player_y < object_y + object_size and player_x < object_x + object_size and player_x + player_size > object_x: 
+      if number == Randomization.randomSequence(randomNum1, randomNum2, randomOperation):
+        score += 100 #incease score and player speed if the number is correct 
+        player_speed += 5
+        object_x = random.randint(0, screen_width - object_size)
+        object_y = 0
+      else: #decreases score if the player is incorrect
+        score -= 50 
+        object_x = random.randint(0, screen_width - object_size)
+        object_y = 0
+    
   
   screen.blit(background_color,(0,0))
   screen.blit(object_color, (object_x, object_y),(100,100,100,100))
