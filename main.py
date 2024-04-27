@@ -50,7 +50,7 @@ randomOperation = listOfOperations[i]
 # Random Math Problems
 math_problems_font = pygame.font.Font(None, 30)
 math_problems_text = str(Randomization.showProblem(randomNum1, randomNum2, randomOperation))
-number = Randomization.randomSequence(randomNum1, randomNum2, randomOperation)
+number = int(Randomization.randomSequence(randomNum1, randomNum2, randomOperation))
 
 
 running = True
