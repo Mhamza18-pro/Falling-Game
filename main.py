@@ -2,7 +2,6 @@ import pygame
 import random
 import Randomization
 
-
 # Initialize Pygame
 pygame.init()
 
@@ -24,7 +23,7 @@ player_speed = 10
 is_paused = False  # Initialize pause state
 
 # initializing a score variable
-score=0
+score = 0
 
 # initializing variable to use in drawing the number on the object
 
@@ -98,7 +97,7 @@ while running:
   # Update player position based on key states
   if key_states[pygame.K_LEFT] and player_x > 0:
       player_x -= player_speed
-  if key_states[pygame.K_RIGHT] and player_x < screen_width - player_size:
+  if key_states[pygame.K_RIGHT] and player_x < screen_width + 10:
       player_x += player_speed
 
   # Game logic when not paused
@@ -118,7 +117,7 @@ while running:
       else:
         number = random.randint(-100,100)
 
-    if player_y < object_y + object_size and player_x < object_x + object_size and player_x + player_size > object_x: 
+    if player_y < object_y + object_size and player_x < object_x + object_size and player_x + 75 > object_x: 
       if number == Randomization.randomSequence(randomNum1, randomNum2, randomOperation):
         correct_answer_text = font.render("Nice!", True, (0, 0, 0)) 
         screen.blit(correct_answer_text, (400, 300))
