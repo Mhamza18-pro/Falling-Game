@@ -60,6 +60,22 @@ running = True
 
 while running:
 
+  screen.blit(background_color,(0,0))
+  screen.blit(object_color, (object_x, object_y))
+  screen.blit(player_color, (player_x, player_y))
+  #Add the timer to the screen 
+  screen.blit(timer_font.render(timer_text, True, black), (32,48))
+
+  #Add the math problems to the screen
+  screen.blit(timer_font.render(math_problems_text, True, black), (350,32))
+
+  text = font.render("Score: " + str(score), True, (0, 0, 0))
+  screen.blit(text, (600, 40))
+
+  text_surface = font.render(str(number), True, black)
+  text_rect = text_surface.get_rect(center=(object_x + object_size // 2, object_y + object_size // 2))
+  screen.blit(text_surface, text_rect)
+
   for event in pygame.event.get():
     if event.type == pygame.QUIT:
       running = False
@@ -89,18 +105,14 @@ while running:
   if not is_paused:
     object_y += object_speed
     probability = random.randint(0,50)
-   
 
     if object_y > screen_height:
-  
-
       # Creates new falling object
       object_x = random.randint(0, screen_width - object_size)
       object_y = 1
 
       #There is a 50% chance that the falling object will be the right answer
-      #generates a new probabiiliy each time item fall off screen
-      print(probability)
+      print(probability) #for TESTING
       if(probability%2 == 0):
         number = Randomization.randomSequence(randomNum1, randomNum2, randomOperation)
       else:
@@ -108,6 +120,11 @@ while running:
 
     if player_y < object_y + object_size and player_x < object_x + object_size and player_x + player_size > object_x: 
       if number == Randomization.randomSequence(randomNum1, randomNum2, randomOperation):
+        correct_answer_text = font.render("Nice!", True, (0, 0, 0)) 
+        screen.blit(correct_answer_text, (400, 300))
+        pygame.display.flip()
+        pygame.event.pump()
+        pygame.time.delay(500)
         score += 100 #incease score and player speed if the number is correct 
         player_speed += 5
         object_x = random.randint(0, screen_width - object_size)
@@ -121,38 +138,27 @@ while running:
         # Random Math Problems
         math_problems_font = pygame.font.Font(None, 30)
         math_problems_text = str(Randomization.showProblem(randomNum1, randomNum2, randomOperation))
+        if(probability%2 == 0):
+         number = Randomization.randomSequence(randomNum1, randomNum2, randomOperation)
+        else:
+          number = random.randint(-100,100)
       else: #decreases score if the player is incorrect
         score -= 50 
         object_x = random.randint(0, screen_width - object_size)
         object_y = 0
+        try_again_text = font.render("Try Again!", True, (0, 0, 0)) 
+        screen.blit(try_again_text, (400, 300))
+        pygame.display.flip()
+        pygame.event.pump()
+        pygame.time.delay(500)
         if(probability%2 == 0): #generates a new number is the number is wrong
           number = Randomization.randomSequence(randomNum1, randomNum2, randomOperation)
         else:
           number = random.randint(-100,100)
-
-
-
-  screen.blit(background_color,(0,0))
-  screen.blit(object_color, (object_x, object_y))
-  screen.blit(player_color, (player_x, player_y))
-  #Add the timer to the screen 
-  screen.blit(timer_font.render(timer_text, True, black), (32,48))
-
-  #Add the math problems to the screen
-  screen.blit(timer_font.render(math_problems_text, True, black), (350,32))
-
-  # Implements code for counting score
-  text = font.render("Score: " + str(score), True, (0, 0, 0))
-  screen.blit(text, (600, 40))
   
   if is_paused:
     pause_text = font.render("Paused - Press Space to Resume", True, (0, 0, 0))
     screen.blit(pause_text, (screen_width // 2 - 200, screen_height // 2))
-
-  # Draws a value on the object as it falls
-  text_surface = font.render(str(number), True, black)
-  text_rect = text_surface.get_rect(center=(object_x + object_size // 2, object_y + object_size // 2))
-  screen.blit(text_surface, text_rect)
 
   pygame.display.flip()
   clock.tick(20) #the number you put in parentheses effects the speed the coin falls
