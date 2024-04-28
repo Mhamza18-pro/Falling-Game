@@ -13,8 +13,8 @@ pygame.display.set_caption('Catching Falling Objects')
 # Define colors and game properties
 background_color = pygame.image.load('GameAssets/7-Little_Helpers-Rainbow_City.webp').convert_alpha()
 object_color = pygame.image.load('GameAssets/SEO_GoldIngots.png').convert_alpha()
-player_color = (0,255,0)
-object_size, player_size = 50, 50
+player_color = pygame.image.load('GameAssets/SEO_Leprechaun.png').convert_alpha()
+object_size, player_size = 50, 200
 object_x = random.randint(0, screen_width - object_size)
 object_y = 0
 object_speed = 10
@@ -87,25 +87,18 @@ while running:
   # Game logic when not paused
   if not is_paused:
     object_y += object_speed
+    probability = random.randint(0,50)
+   
 
     if object_y > screen_height:
-      # generate a new problem each time the gold falls off the screen
-      randomNum1 = random.randint(0,20)
-      randomNum2 = random.randint(0,20)
-      listOfOperations = ["x", "+", "-", "/"]
-      i = random.randint(0,3)
-      randomOperation = listOfOperations[i]
-
-      # Random Math Problems
-      math_problems_font = pygame.font.Font(None, 30)
-      math_problems_text = str(Randomization.showProblem(randomNum1, randomNum2, randomOperation))
+  
 
       # Creates new falling object
       object_x = random.randint(0, screen_width - object_size)
       object_y = 1
 
       #There is a 50% chance that the falling object will be the right answer
-      probability = random.randint(0,50) #generates a new probabiiliy each time item fall off screen
+      #generates a new probabiiliy each time item fall off screen
       print(probability)
       if(probability%2 == 0):
         number = Randomization.randomSequence(randomNum1, randomNum2, randomOperation)
@@ -118,17 +111,29 @@ while running:
         player_speed += 5
         object_x = random.randint(0, screen_width - object_size)
         object_y = 0
+        # generate a new problem each time the player get a correct answer
+        randomNum1 = random.randint(0,20)
+        randomNum2 = random.randint(0,20)
+        listOfOperations = ["x", "+", "-", "/"]
+        i = random.randint(0,3)
+        randomOperation = listOfOperations[i]
+        # Random Math Problems
+        math_problems_font = pygame.font.Font(None, 30)
+        math_problems_text = str(Randomization.showProblem(randomNum1, randomNum2, randomOperation))
       else: #decreases score if the player is incorrect
         score -= 50 
         object_x = random.randint(0, screen_width - object_size)
         object_y = 0
+        if(probability%2 == 0): #generates a new number is the number is wrong
+          number = Randomization.randomSequence(randomNum1, randomNum2, randomOperation)
+        else:
+          number = random.randint(-100,100)
+
 
 
   screen.blit(background_color,(0,0))
-  screen.blit(object_color, (object_x, object_y),(100,100,100,100))
-  # screen.blit(player_color, (player_x, player_y),(100,100,100,100))
-  pygame.draw.rect(screen, player_color,
-     (player_x, player_y, player_size, player_size))
+  screen.blit(object_color, (object_x, object_y))
+  screen.blit(player_color, (player_x, player_y))
   #Add the timer to the screen 
   screen.blit(timer_font.render(timer_text, True, black), (32,48))
 

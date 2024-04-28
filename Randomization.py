@@ -17,8 +17,11 @@ def randomSequence(randomNum1, randomNum2, randomOperation):
             additionAnswer = str(randomNum1 + randomNum2)
             return additionAnswer
     elif randomOperation == "/":
-         divisionAnswer = str(Fraction(randomNum1, randomNum2))
-         return divisionAnswer
+         if (randomNum2 == 0):
+              return 'NAN'
+         else:
+            divisionAnswer = str(Fraction(randomNum1, randomNum2))
+            return divisionAnswer
     else:
          substractionAnswer = str(randomNum1 - randomNum2)
          return substractionAnswer
