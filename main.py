@@ -64,10 +64,11 @@ while running:
     if event.type == pygame.QUIT:
       running = False
     if event.type == pygame.USEREVENT:
-      counter -= 1
-      timer_text = str(counter).rjust(3) if counter > 0 else "Time's Up!" 
-      if counter == -2:
-        running = False
+      if not is_paused:
+        counter -= 1
+        timer_text = str(counter).rjust(3) if counter > 0 else "Time's Up!" 
+        if counter == -2:
+          running = False
   # Enables the player's movement
     if event.type == pygame.KEYDOWN:
       if event.key in key_states:
